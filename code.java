@@ -17,29 +17,29 @@ public static Array freetime(int[] Arr1, int[] arr2) {
 			while(finalArr[i] ==1) {
 				finish = i;
 				i++;
-				if(start>60) {
-					startHour = start/60;
-					startMinute = start % 60;
-					if(finish > 60) {
-						finishHour = finish/60;
-						finishMinute = finish % 60;
-					}
-					System.out.println("free from : " + startHour + ":" + startMinute " to "
-							+ finishHour + ":"+ finishMinute + "\n");
-				}else if (start < 60){
-					startHour = 12;
-					startMinute = start % 60;
-					if(finish > 60) {
-						finishHour = finish/60;
-						finishMinute = finish % 60;
-					}else if(finish < 60) {
-						finishHour = 12;
-						finishMinute = finish % 60;
-					}
-					System.out.println("free from : " + startHour + ":" + startMinute " to "
-							+ finishHour + ":"+ finishMinute + "\n");
-				}
 			}
+		}
+		if(start>60) {
+			startHour = start/60;
+			startMinute = start % 60;
+			if(finish > 60) {
+				finishHour = finish/60;
+				finishMinute = finish % 60;
+			}
+			System.out.println("free from : " + startHour + ":" + startMinute " to "
+					+ finishHour + ":"+ finishMinute + "\n");
+		}else if (start < 60){
+			startHour = 12;
+			startMinute = start % 60;
+			if(finish > 60) {
+				finishHour = finish/60;
+				finishMinute = finish % 60;
+			}else if(finish < 60) {
+				finishHour = 12;
+				finishMinute = finish % 60;
+			}
+			System.out.println("free from : " + startHour + ":" + startMinute " to "
+					+ finishHour + ":"+ finishMinute + "\n");
 		}
 		
 	}
