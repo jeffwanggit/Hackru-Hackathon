@@ -58,28 +58,32 @@ public class inputTimeMthd {
 		String[] Sinfo, Einfo;
 		
 		for(int i =1; i <= events; i++) {
-			//ask user input
-			System.out.print("Enter start time of Event " + i + "(##:## am/pm) ");
-			Stime = key.nextLine();
-			System.out.print("Enter end time of Event " + i + "(##:## am/pm) ");
-			Etime = key.nextLine();
-			System.out.println();
-			
-			//splits the hours, minutes, and time of day of the time into elements of an array
-			Sinfo = Stime.split(delims);
-			Einfo = Etime.split(delims); 
-			
-			//invalid case if no space exists between the time and the time period
-			if( (Sinfo.length < 3) || (Einfo.length < 3) ) {
-				System.out.println("Invalid Input... Re-enter times with correct formatting...");
-				System.out.println("*Notice the space between the actual time and time indicator*\n");
-				func(events);
-			}
+			//loops until there is no invalid case, where there is no space between the time and the time reference
+			do {
+				//ask user input
+				System.out.print("Enter start time of Event " + i + " (##:## am/pm): ");
+				Stime = key.nextLine();
+				System.out.print("Enter end time of Event " + i + " (##:## am/pm): ");
+				Etime = key.nextLine();
+				System.out.println();
+				
+				//splits the hours, minutes, and time of day of the time into elements of an array
+				Sinfo = Stime.split(delims);
+				Einfo = Etime.split(delims); 
+				
+				//output error message if there is no space between the time and the time reference
+				if((Sinfo.length < 3) || (Einfo.length < 3)) {
+					System.out.println("Invalid Input... Re-enter times with correct formatting...");
+					System.out.println("*Notice the space between the actual time and time indicator*\n");
+				}
+				
+			}while( (Sinfo.length < 3) || (Einfo.length < 3) );
 			
 			//gets the start and end positions in terms of the array indices
 			int minuteStart = minuteStart(Integer.parseInt(Sinfo[0]), Integer.parseInt(Sinfo[1]), Sinfo[2]);
 			int minuteEnd = minuteEnd(Integer.parseInt(Einfo[0]), Integer.parseInt(Einfo[1]) , Einfo[2]);
 			
+			//assign busy time in schedule with 1's
 			for(int j= minuteStart ; j < minuteEnd; j++)
 				schedule[j] = 1;
 		}
@@ -89,7 +93,7 @@ public class inputTimeMthd {
 
 	public static void main(String[] args) {
 		int[] x = new int[1439];
-		x = func(2);
+		x = func(1);
 		
 		for(int i=0; i < x.length;i++) {
 			//if(x[i] == 1)
