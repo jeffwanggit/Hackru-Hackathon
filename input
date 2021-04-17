@@ -1,1 +1,81 @@
-hello
+package hello;
+import java.util.Scanner;
+
+public class inputTimeMthd {
+	
+	static public int minuteStart(int hour, int minute, String tODay) {
+		int time = 0;
+		
+		if(tODay.equalsIgnoreCase("pm")) {
+			if(hour == 12)
+				return hour*60 + minute;
+			else
+				return (12+hour)*60 + minute;
+		}
+		else if(hour == 12)
+			time = 0 + minute;
+		else
+			time = hour*60 + minute;
+		
+		return time;
+	}
+	
+	static public int minuteEnd(int hour, int minute, String tODay) {
+		int time = 0;
+		
+		if(tODay.equalsIgnoreCase("pm")) {
+			if(hour == 12)
+				return hour*60 + minute;
+			else
+				return (12+hour)*60 + minute;
+		}
+		else if(hour == 12)
+			time = 0 + minute;
+		else
+			time = hour*60 + minute;
+		
+		return time;
+	}
+	
+	static public int[] func(int events) {
+		Scanner key = new Scanner(System.in);
+		int[] schedule = new int[1439];
+		String Stime;
+		String Etime;
+		String delims = "[ :]";
+		String[] Sinfo, Einfo;
+		
+		for(int i =1; i <= events; i++) {
+			//ask user input
+			System.out.print("Enter start time of Event " + i);
+			Stime = key.nextLine();
+			System.out.print("Enter end time of Event " + i);
+			Etime = key.nextLine();
+			System.out.println();
+			
+			Sinfo = Stime.split(delims); // 12 30 pm
+			Einfo = Etime.split(delims);
+			
+			int minuteStart = minuteStart(Integer.parseInt(Sinfo[0]), Integer.parseInt(Sinfo[1]), Sinfo[2]);
+			int minuteEnd = minuteEnd(Integer.parseInt(Einfo[0]), Integer.parseInt(Einfo[1]) , Einfo[2]);
+			
+			for(int j= minuteStart ; j < minuteEnd; j++)
+			{
+				schedule[j] = 1;
+			}
+		}
+
+		
+		return schedule;
+	}
+
+	public static void main(String[] args) {
+		int[] x = new int[1439];
+		x = func(2);
+		
+		for(int i=0; i < x.length;i++) {
+			//if(x[i] == 1)
+				System.out.print(x[i] + " ");
+		}
+	}
+}
